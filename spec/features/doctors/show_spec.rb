@@ -45,5 +45,36 @@ RSpec.describe 'doctors show page' do
       expect(page).to have_content(patient_3.name)
       expect(page).to_not have_content(patient_4.name)
     end
+
+    it 'displays a remove button next to patient names to remove patients from doctors caseload' do
+      visit "/doctors/#{doctor_1.id}"
+
+      within "#patient-#{patient_1.id}" do
+        click_button("Remove Patient")
+      end
+      
+      expect(current_path).to eq("/doctors/#{doctor_1.id}")
+      expect(page).to_not have_content(patient_1.id)
+
+      within "#patient-#{patient_2.id}" do
+        click_button("Remove Patient")
+      end
+      
+      expect(current_path).to eq("/doctors/#{doctor_1.id}")
+      expect(page).to_not have_content(patient_2.id)
+
+      within "#patient-#{patient_3.id}" do
+        click_button("Remove Patient")
+      end
+      
+      expect(current_path).to eq("/doctors/#{doctor_1.id}")
+      expect(page).to_not have_content(patient_3.id)
+    end
+
+    it 'should still display deleted patient from doctor_1 on doctor_2 show page' do
+      visit "/doctors/#{doctor_2.id}"
+
+      expect(page).to have_content(patient_3.name)
+    end
   end
 end

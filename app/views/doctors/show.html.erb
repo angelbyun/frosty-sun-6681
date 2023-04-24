@@ -10,6 +10,8 @@
 <h3>Patients</h3>
 <ul>
 <% @doctor.patients.each do |patient| %>
-  <li><p><b>Name: </b><%= patient.name %></p>
+<div id="patient-<%= patient.id %>">
+  <li><p><b>Name: </b><%= patient.name %><%= button_to "Remove Patient", "/doctors/#{@doctor.id}", method: :delete %></p>
+</div>
 <% end %>
 </ul>
