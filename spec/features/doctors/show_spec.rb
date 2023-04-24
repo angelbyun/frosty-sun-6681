@@ -14,6 +14,7 @@ RSpec.describe 'doctors show page' do
   before do
     DoctorPatient.create!(doctor: doctor_1, patient: patient_1)
     DoctorPatient.create!(doctor: doctor_1, patient: patient_2)
+    DoctorPatient.create!(doctor: doctor_1, patient: patient_3)
     DoctorPatient.create!(doctor: doctor_2, patient: patient_3)
     DoctorPatient.create!(doctor: doctor_2, patient: patient_4)
   end
@@ -25,6 +26,9 @@ RSpec.describe 'doctors show page' do
       expect(page).to have_content(doctor_1.name)
       expect(page).to have_content(doctor_1.specialty)
       expect(page).to have_content(doctor_1.university)
+      expect(page).to_not have_content(doctor_2.name)
+      expect(page).to_not have_content(doctor_2.specialty)
+      expect(page).to_not have_content(doctor_2.university)
     end
 
     it 'displays the name of the hospital a doctor works at' do
@@ -35,9 +39,11 @@ RSpec.describe 'doctors show page' do
 
     it 'displays the names of all the patients a doctor has' do
       visit "/doctors/#{doctor_1.id}"
-save_and_open_page
+
       expect(page).to have_content(patient_1.name)
       expect(page).to have_content(patient_2.name)
+      expect(page).to have_content(patient_3.name)
+      expect(page).to_not have_content(patient_4.name)
     end
   end
 end
