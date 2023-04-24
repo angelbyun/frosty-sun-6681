@@ -19,9 +19,11 @@ DoctorPatient.destroy_all
 @patient_2 = Patient.create!(name: "Scott Le", age: 32)
 @patient_3 = Patient.create!(name: "Megan Hinricher", age: 30)
 @patient_4 = Patient.create!(name: "Marina Chhay", age: 29)
+@patient_5 = Patient.create!(name: "Mason Shieh", age: 9)
 
 DoctorPatient.create!(doctor: @doctor_1, patient: @patient_1)
 DoctorPatient.create!(doctor: @doctor_1, patient: @patient_2)
 DoctorPatient.create!(doctor: @doctor_1, patient: @patient_3)
+DoctorPatient.create!(doctor: @doctor_1, patient: @patient_5)
 DoctorPatient.create!(doctor: @doctor_2, patient: @patient_3)
 DoctorPatient.create!(doctor: @doctor_2, patient: @patient_4)

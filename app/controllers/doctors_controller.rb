@@ -14,8 +14,6 @@ class DoctorsController < ApplicationController
       doctor.patients.delete(patient)
       flash[:success] = "Patient has been removed from caseload"
     end
-    # patient = Patient.find(params[:id])
-    # patient.destroy
     redirect_to "/doctors/#{@doctor.id}"
   end
 end
