@@ -18,7 +18,7 @@ RSpec.describe 'doctor destroy page' do
     DoctorPatient.create!(doctor: doctor_2, patient: patient_3)
     DoctorPatient.create!(doctor: doctor_2, patient: patient_4)
   end
-  
+
   describe 'As a visitor when I visit the doctor destroy page' do
     it 'displays a remove button next to patient names to remove patients from doctors caseload' do
       visit "/doctors/#{doctor_1.id}"
@@ -27,6 +27,7 @@ RSpec.describe 'doctor destroy page' do
         click_button("Remove Patient")
       end
       
+      doctor_1.reload
       expect(current_path).to eq("/doctors/#{doctor_1.id}")
       expect(page).to_not have_content(patient_1.id)
 
@@ -34,6 +35,7 @@ RSpec.describe 'doctor destroy page' do
         click_button("Remove Patient")
       end
       
+      doctor_1.reload
       expect(current_path).to eq("/doctors/#{doctor_1.id}")
       expect(page).to_not have_content(patient_2.id)
 
@@ -41,6 +43,7 @@ RSpec.describe 'doctor destroy page' do
         click_button("Remove Patient")
       end
       
+      doctor_1.reload
       expect(current_path).to eq("/doctors/#{doctor_1.id}")
       expect(page).to_not have_content(patient_3.id)
     end
